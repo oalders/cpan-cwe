@@ -1,0 +1,111 @@
+#!/usr/bin/env perl
+
+# Build a standalone HTML report (bar chart + category rollup + full table)
+# from data/records.json. Writes data/report.html.
+
+use v5.36;
+use FindBin ();
+use lib "$FindBin::RealBin/../lib";
+use CPAN::CWE qw(load_records load_categories cwe_counts categorize);
+use Mojo::File     qw(path);
+use Mojo::Util     qw(xml_escape);
+
+my $root    = path("$FindBin::RealBin/..");
+my $records = load_records( $root->child('data', 'records.json') );
+my ( $of, $order ) = load_categories( $root->child('categories.json') );
+
+my ( $count, $name ) = cwe_counts($records);
+my @ranked = sort { $count->{$b} <=> $count->{$a} || $a cmp $b } keys %$count;
+my $assignments = 0;
+$assignments += $_ for values %$count;
+
+my %cat_total;
+$cat_total{ categorize( $of, $_ ) } += $count->{$_} for @ranked;
+my @cats = sort { $cat_total{$b} <=> $cat_total{$a} || $a cmp $b } keys %cat_total;
+
+my $HUE   = '#4f46e5';    # single sequential hue (one series, magnitude)
+my $MAXW  = 520;
+
+sub bars ( $rows, $max ) {    # $rows = [ [label, count, name], ... ]
+    my $html = '';
+    for my $r (@$rows) {
+        my ( $lab, $c, $nm ) = @$r;
+        my $w = int( $MAXW * $c / $max + 0.5 );
+        $w = 6 if $w < 6;
+        $html .= sprintf
+            qq{<div class="row"><div class="lab">%s</div>}
+          . qq{<div class="track"><div class="bar" style="width:%dpx"></div>}
+          . qq{<span class="val">%d</span></div><div class="nm">%s</div></div>\n},
+            xml_escape($lab), $w, $c, xml_escape($nm);
+    }
+    return $html;
+}
+
+my $top_n = @ranked < 20 ? $#ranked : 19;
+my @top_rows = map { [ $_, $count->{$_}, $name->{$_} ] } @ranked[ 0 .. $top_n ];
+my @cat_rows = map { [ $_, $cat_total{$_}, '' ] } @cats;
+
+my $table = '';
+my $i     = 0;
+for my $id (@ranked) {
+    ( my $num = $id ) =~ s/\D//g;
+    $table .= sprintf
+        qq{<tr><td>%d</td><td><a href="https://cwe.mitre.org/data/definitions/%s.html">%s</a></td>}
+      . qq{<td class="num">%d</td><td>%s</td></tr>\n},
+        ++$i, $num, $id, $count->{$id}, xml_escape( $name->{$id} );
+}
+
+my $n_cves = scalar @$records;
+my $n_cwe  = scalar @ranked;
+
+my $doc = <<"HTML";
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>CPANSec CVEs by CWE</title>
+<style>
+:root{--ink:#1a1a2e;--mut:#6b7280;--line:#e5e7eb;--hue:$HUE}
+body{font:15px/1.5 system-ui,sans-serif;margin:0;color:var(--ink);background:#f8f8fb}
+main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:1.5rem;margin:.2em 0}
+.sub{color:var(--mut);margin:0 0 1.5em}
+h2{font-size:1.05rem;margin:2em 0 .6em;border-bottom:2px solid var(--line);padding-bottom:.3em}
+.row{display:grid;grid-template-columns:74px 560px 1fr;align-items:center;gap:10px;margin:3px 0}
+.lab{font:600 13px ui-monospace,monospace;text-align:right}
+.track{position:relative;display:flex;align-items:center}
+.bar{height:16px;background:var(--hue);border-radius:0 4px 4px 0}
+.val{font:600 12px system-ui;margin-left:7px}
+.nm{font-size:12px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cat .row{grid-template-columns:280px 400px 1fr}
+.cat .lab{font-weight:600;font-family:system-ui;text-align:right}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:.5em}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}
+td.num{text-align:right;font-variant-numeric:tabular-nums;width:3em}
+a{color:var(--hue)}
+.note{font-size:12.5px;color:var(--mut);background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+</style></head><body><main>
+<h1>CPANSec CVEs classified by CWE</h1>
+<p class=sub>$n_cves CVEs announced on the <a href="https://lists.security.metacpan.org/cve-announce/">cve-announce</a> list
+&middot; $n_cwe distinct CWEs &middot; $assignments CWE assignments (some CVEs carry more than one CWE).</p>
+
+<h2>Top 20 CWEs by number of CVEs</h2>
+@{[ bars(\@top_rows, $top_rows[0][1]) ]}
+
+<h2>Editorial category rollup</h2>
+<p class=note>Counts are CWE <em>assignments</em> grouped into hand-made buckets (a CVE
+with two CWEs contributes to two). The grouping lives in <code>categories.json</code> &mdash; edit to taste.</p>
+<div class=cat>
+@{[ bars(\@cat_rows, $cat_rows[0][1]) ]}
+</div>
+
+<h2>Full ranking ($n_cwe CWEs)</h2>
+<table><thead><tr><th>#</th><th>CWE</th><th>CVEs</th><th>Name</th></tr></thead>
+<tbody>
+$table
+</tbody></table>
+</main></body></html>
+HTML
+
+my $out = $root->child('data', 'report.html');
+$out->spurt($doc);
+say "wrote $out";

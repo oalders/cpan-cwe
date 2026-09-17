@@ -1,0 +1,59 @@
+#!/usr/bin/env perl
+
+# Rank the CWEs found across the collected CPANSec CVEs and roll them up into
+# editorial categories. Prints the tables and writes data/cwe-by-cve.csv.
+#
+# Run bin/collect-cves first to produce data/records.json.
+
+use v5.36;
+use FindBin ();
+use lib "$FindBin::RealBin/../lib";
+use CPAN::CWE qw(load_records load_categories cwe_counts categorize);
+use Mojo::File qw(path);
+use Text::CSV  ();
+
+my $root    = path("$FindBin::RealBin/..");
+my $records = load_records( $root->child('data', 'records.json') );
+my ( $of, $order ) = load_categories( $root->child('categories.json') );
+
+my ( $count, $name ) = cwe_counts($records);
+my @ranked = sort { $count->{$b} <=> $count->{$a} || $a cmp $b } keys %$count;
+my $assignments = 0;
+$assignments += $_ for values %$count;
+
+# --- category rollup (by CWE assignment) ------------------------------------
+my %cat_total;
+$cat_total{ categorize( $of, $_ ) } += $count->{$_} for @ranked;
+my @cats = sort { $cat_total{$b} <=> $cat_total{$a} || $a cmp $b } keys %cat_total;
+
+# --- report to stdout -------------------------------------------------------
+say sprintf 'CPANSec CVEs classified by CWE';
+say sprintf 'distinct CVEs: %d  |  distinct CWEs: %d  |  CWE assignments: %d',
+    scalar(@$records), scalar(@ranked), $assignments;
+
+say "\nTop 15 CWEs (by number of CVEs)";
+my $rank = 0;
+for my $id ( @ranked[ 0 .. ( @ranked < 15 ? $#ranked : 14 ) ] ) {
+    printf "%2d. %-9s %3d  %s\n", ++$rank, $id, $count->{$id}, $name->{$id};
+}
+
+say "\nCategory rollup (editorial; counts CWE assignments)";
+printf "%4d  %s\n", $cat_total{$_}, $_ for @cats;
+
+# --- CSV: one row per CVE ---------------------------------------------------
+my $csv_path = $root->child('data', 'cwe-by-cve.csv');
+my $csv = Text::CSV->new( { binary => 1, eol => "\n" } );
+open my $fh, '>:encoding(UTF-8)', $csv_path or die "$csv_path: $!";
+$csv->print( $fh, [qw(cve announce_date cwe_ids cwe_names subject)] );
+for my $r ( sort { $a->{date} cmp $b->{date} } @$records ) {
+    $csv->print(
+        $fh,
+        [   $r->{cve}, $r->{date},
+            join( ';', map { $_->{id} } @{ $r->{cwes} } ),
+            join( ';', map { $_->{name} } @{ $r->{cwes} } ),
+            $r->{subject},
+        ]
+    );
+}
+close $fh;
+say "\nwrote $csv_path";

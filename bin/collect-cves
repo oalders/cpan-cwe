@@ -1,0 +1,114 @@
+#!/usr/bin/env perl
+
+# Collect the CVEs CPANSec has announced on its public cve-announce list and
+# record the CWE(s) assigned to each. Writes data/records.json.
+#
+# Source: https://lists.security.metacpan.org/cve-announce/
+# Every message on that list is a CVE CPANSec published as a CNA, and each
+# advisory carries a "Problem types" section listing its CWE(s) -- so the list
+# is a single, self-contained source for "which CVEs, classified by CWE".
+
+use v5.36;
+use FindBin              ();
+use Mojo::UserAgent      ();
+use Mojo::File           qw(path);
+use Cpanel::JSON::XS     qw(encode_json);
+use Time::HiRes          qw(usleep);
+use Time::Piece          ();
+
+my $BASE  = 'https://lists.security.metacpan.org/cve-announce';
+my $START = shift(@ARGV) // '2026-05';    # first month to include (YYYY-MM)
+my $END   = shift(@ARGV) // Time::Piece->localtime->strftime('%Y-%m');
+
+my $root    = path("$FindBin::RealBin/..");
+my $outfile = $root->child('data', 'records.json');
+
+my $ua = Mojo::UserAgent->new->max_redirects(5)->connect_timeout(30)->request_timeout(60);
+$ua->transactor->name('cpan-cwe/1.0 (+https://github.com/oalders/cpan-cwe)');
+
+# --- build the list of YYYY-MM months from START through END, inclusive ------
+sub months ( $start, $end ) {
+    my @out;
+    my $t   = Time::Piece->strptime( "$start-01", '%Y-%m-%d' );
+    my $stop = Time::Piece->strptime( "$end-01",   '%Y-%m-%d' );
+    while ( $t <= $stop ) {
+        push @out, $t->strftime('%Y-%m');
+        $t = $t->add_months(1);
+    }
+    return @out;
+}
+
+# --- pull one CWE list out of an advisory's "Problem types" section ----------
+sub cwes_from ($text) {
+    my @cwe;
+    my %seen;
+    # The advisory body has:  Problem types \n ------ \n - CWE-NN Name \n ...
+    if ( $text =~ /Problem \s+ types \s* \n -+ \s* \n (.*?) \n \s* \n/xis ) {
+        my $section = $1;
+        while ( $section =~ /CWE-(\d+) \s+ ([^\n]*)/xg ) {
+            my ( $id, $name ) = ( "CWE-$1", $2 );
+            $name =~ s/\s+\z//;
+            $name =~ s/^\((.*)\)\z/$1/;    # unwrap a fully-parenthesised name
+            next if $seen{$id}++;
+            push @cwe, { id => $id, name => $name };
+        }
+    }
+    # Fallback: no recognised section, scan the whole body.
+    unless (@cwe) {
+        while ( $text =~ /CWE-(\d+) \s+ ([^\n]*)/xg ) {
+            my ( $id, $name ) = ( "CWE-$1", $2 );
+            $name =~ s/\s+\z//;
+            $name =~ s/^\((.*)\)\z/$1/;
+            next if $seen{$id}++;
+            push @cwe, { id => $id, name => $name };
+        }
+    }
+    return \@cwe;
+}
+
+my %record;     # CVE => record (first announcement wins)
+my $replies = 0;
+
+for my $ym ( months( $START, $END ) ) {
+    my ( $y, $m ) = split /-/, $ym;
+    my $url = sprintf '%s/dates/%d/%02d/', $BASE, $y, $m;
+    my $dom = $ua->get($url)->result->dom;
+
+    my @rows = $dom->find('table tr')->grep( sub { $_->find('td a')->size >= 2 } )->each;
+    say sprintf 'index %s : %d rows', $ym, scalar @rows;
+
+    for my $tr (@rows) {
+        my @a      = $tr->find('td a')->each;
+        my ($id)   = ( $a[0]->attr('href') // '' ) =~ m{msg/(\d+)/};
+        my $date   = $a[0]->all_text =~ s/^\s+|\s+$//gr;
+        my $subject = $a[1]->all_text =~ s/^\s+|\s+$//gr;
+        next unless $id;
+
+        if ( $subject =~ /^re:/i ) { $replies++; next; }    # skip follow-ups
+        my ($cve) = $subject =~ /(CVE-\d{4}-\d+)/;
+        next unless $cve;
+        next if $record{$cve};                              # keep first announcement
+
+        my $body = $ua->get("$BASE/msg/$id/")->result->dom->all_text;
+        $record{$cve} = {
+            cve     => $cve,
+            msg_id  => $id,
+            date    => $date,
+            subject => $subject,
+            cwes    => cwes_from($body),
+        };
+        usleep(150_000);    # be polite to the archive
+    }
+}
+
+my @records = sort { $a->{cve} cmp $b->{cve} } values %record;
+my $missing = grep { !@{ $_->{cwes} } } @records;
+
+$outfile->spurt( encode_json( \@records ) );
+
+say '';
+say sprintf 'window            : %s .. %s', $START, $END;
+say sprintf 'distinct CVEs     : %d', scalar @records;
+say sprintf 'follow-ups skipped: %d', $replies;
+say sprintf 'CVEs with no CWE  : %d', $missing;
+say sprintf 'wrote             : %s', $outfile;

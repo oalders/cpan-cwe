@@ -1,0 +1,13 @@
+{
+  "_comment": "Editorial rollup of CWE ids into themes. Each CWE should appear at most once. Anything not listed falls into 'Other'. Edit freely.",
+  "Memory safety (XS/C)": [125, 787, 121, 122, 124, 126, 190, 191, 196, 416, 415, 476, 763, 805, 680, 843, 401, 672, 170, 789],
+  "Injection / improper neutralization": [93, 113, 444, 79, 95, 150, 78, 88, 89, 1336, 643, 145, 790, 502, 470, 829],
+  "Filesystem: symlink / permissions / path": [59, 732, 73, 22, 552, 426, 384],
+  "Weak randomness / predictable values": [338, 340, 331, 330, 335, 341, 1025],
+  "Resource exhaustion / DoS": [770, 400, 674, 835, 405, 407, 1333, 409, 248, 755],
+  "Cryptography / authentication": [347, 295, 916, 323, 1394, 757, 353, 522, 305, 294, 307, 640],
+  "Info disclosure / SSRF / CSRF": [319, 201, 524, 642, 862, 601, 918, 352, 804],
+  "Input validation (type / quantity)": [1287, 1289, 1284, 480, 628, 670],
+  "Timing / side channel": [208, 204],
+  "Vulnerable / unmaintained dependencies": [1395, 1104]
+}
