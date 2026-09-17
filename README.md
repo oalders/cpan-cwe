@@ -64,4 +64,9 @@ perl bin/collect-cves 2026-05 2026-08
 | `data/report.html`     | standalone visual report |
 
 The `data/` snapshot committed here is regenerable at any time by re-running the
-pipeline; numbers move as CPANSec publishes more advisories.
+pipeline; numbers move as CPANSec publishes more advisories. A weekly GitHub
+Action (`.github/workflows/refresh.yml`) refreshes it automatically.
+
+## License
+
+[Artistic License 2.0](LICENSE), the same terms as Perl itself.
