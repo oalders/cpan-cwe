@@ -24,8 +24,8 @@ a{color:var(--hue)}
 .note{font-size:12.5px;color:var(--mut);background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px}
 </style></head><body><main>
 <h1>CPANSec CVEs classified by CWE</h1>
-<p class=sub>220 CVEs announced on the <a href="https://lists.security.metacpan.org/cve-announce/">cve-announce</a> list
-&middot; 91 distinct CWEs &middot; 292 CWE assignments (some CVEs carry more than one CWE).</p>
+<p class=sub>224 CVEs announced on the <a href="https://lists.security.metacpan.org/cve-announce/">cve-announce</a> list
+&middot; 93 distinct CWEs &middot; 298 CWE assignments (some CVEs carry more than one CWE).</p>
 
 <h2>Top 20 CWEs by number of CVEs</h2>
 <div class="row"><div class="lab">CWE-125</div><div class="track"><div class="bar" style="width:520px"></div><span class="val">27</span></div><div class="nm">Out-of-bounds Read</div></div>
@@ -46,28 +46,29 @@ a{color:var(--hue)}
 <div class="row"><div class="lab">CWE-79</div><div class="track"><div class="bar" style="width:96px"></div><span class="val">5</span></div><div class="nm">Improper Neutralization of Input During Web Page Generation</div></div>
 <div class="row"><div class="lab">CWE-150</div><div class="track"><div class="bar" style="width:77px"></div><span class="val">4</span></div><div class="nm">Improper Neutralization of Escape, Meta, or Control Sequences</div></div>
 <div class="row"><div class="lab">CWE-401</div><div class="track"><div class="bar" style="width:77px"></div><span class="val">4</span></div><div class="nm">Missing Release of Memory after Effective Lifetime</div></div>
+<div class="row"><div class="lab">CWE-789</div><div class="track"><div class="bar" style="width:77px"></div><span class="val">4</span></div><div class="nm">Memory Allocation with Excessive Size Value</div></div>
 <div class="row"><div class="lab">CWE-95</div><div class="track"><div class="bar" style="width:77px"></div><span class="val">4</span></div><div class="nm">Improper Neutralization of Directives in Dynamically Evaluated</div></div>
-<div class="row"><div class="lab">CWE-1284</div><div class="track"><div class="bar" style="width:58px"></div><span class="val">3</span></div><div class="nm">Improper Validation of Specified Quantity in Input</div></div>
 
 
 <h2>Editorial category rollup</h2>
 <p class=note>Counts are CWE <em>assignments</em> grouped into hand-made buckets (a CVE
 with two CWEs contributes to two). The grouping lives in <code>categories.json</code> &mdash; edit to taste.</p>
 <div class=cat>
-<div class="row"><div class="lab">Memory safety (XS/C)</div><div class="track"><div class="bar" style="width:520px"></div><span class="val">73</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Injection / improper neutralization</div><div class="track"><div class="bar" style="width:356px"></div><span class="val">50</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Filesystem: symlink / permissions / path</div><div class="track"><div class="bar" style="width:321px"></div><span class="val">45</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Weak randomness / predictable values</div><div class="track"><div class="bar" style="width:221px"></div><span class="val">31</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Resource exhaustion / DoS</div><div class="track"><div class="bar" style="width:199px"></div><span class="val">28</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Cryptography / authentication</div><div class="track"><div class="bar" style="width:164px"></div><span class="val">23</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Input validation (type / quantity)</div><div class="track"><div class="bar" style="width:107px"></div><span class="val">15</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Info disclosure / SSRF / CSRF</div><div class="track"><div class="bar" style="width:100px"></div><span class="val">14</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Timing / side channel</div><div class="track"><div class="bar" style="width:57px"></div><span class="val">8</span></div><div class="nm"></div></div>
-<div class="row"><div class="lab">Vulnerable / unmaintained dependencies</div><div class="track"><div class="bar" style="width:36px"></div><span class="val">5</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Memory safety (XS/C)</div><div class="track"><div class="bar" style="width:520px"></div><span class="val">75</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Injection / improper neutralization</div><div class="track"><div class="bar" style="width:354px"></div><span class="val">51</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Filesystem: symlink / permissions / path</div><div class="track"><div class="bar" style="width:312px"></div><span class="val">45</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Weak randomness / predictable values</div><div class="track"><div class="bar" style="width:215px"></div><span class="val">31</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Resource exhaustion / DoS</div><div class="track"><div class="bar" style="width:201px"></div><span class="val">29</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Cryptography / authentication</div><div class="track"><div class="bar" style="width:159px"></div><span class="val">23</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Input validation (type / quantity)</div><div class="track"><div class="bar" style="width:104px"></div><span class="val">15</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Info disclosure / SSRF / CSRF</div><div class="track"><div class="bar" style="width:97px"></div><span class="val">14</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Timing / side channel</div><div class="track"><div class="bar" style="width:55px"></div><span class="val">8</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Vulnerable / unmaintained dependencies</div><div class="track"><div class="bar" style="width:35px"></div><span class="val">5</span></div><div class="nm"></div></div>
+<div class="row"><div class="lab">Other</div><div class="track"><div class="bar" style="width:14px"></div><span class="val">2</span></div><div class="nm"></div></div>
 
 </div>
 
-<h2>Full ranking (91 CWEs)</h2>
+<h2>Full ranking (93 CWEs)</h2>
 <table><thead><tr><th>#</th><th>CWE</th><th>CVEs</th><th>Name</th></tr></thead>
 <tbody>
 <tr><td>1</td><td><a href="https://cwe.mitre.org/data/definitions/125.html">CWE-125</a></td><td class="num">27</td><td>Out-of-bounds Read</td></tr>
@@ -88,79 +89,81 @@ with two CWEs contributes to two). The grouping lives in <code>categories.json</
 <tr><td>16</td><td><a href="https://cwe.mitre.org/data/definitions/79.html">CWE-79</a></td><td class="num">5</td><td>Improper Neutralization of Input During Web Page Generation</td></tr>
 <tr><td>17</td><td><a href="https://cwe.mitre.org/data/definitions/150.html">CWE-150</a></td><td class="num">4</td><td>Improper Neutralization of Escape, Meta, or Control Sequences</td></tr>
 <tr><td>18</td><td><a href="https://cwe.mitre.org/data/definitions/401.html">CWE-401</a></td><td class="num">4</td><td>Missing Release of Memory after Effective Lifetime</td></tr>
-<tr><td>19</td><td><a href="https://cwe.mitre.org/data/definitions/95.html">CWE-95</a></td><td class="num">4</td><td>Improper Neutralization of Directives in Dynamically Evaluated</td></tr>
-<tr><td>20</td><td><a href="https://cwe.mitre.org/data/definitions/1284.html">CWE-1284</a></td><td class="num">3</td><td>Improper Validation of Specified Quantity in Input</td></tr>
-<tr><td>21</td><td><a href="https://cwe.mitre.org/data/definitions/1287.html">CWE-1287</a></td><td class="num">3</td><td>Improper Validation of Specified Type of Input</td></tr>
-<tr><td>22</td><td><a href="https://cwe.mitre.org/data/definitions/1333.html">CWE-1333</a></td><td class="num">3</td><td>Inefficient Regular Expression Complexity</td></tr>
-<tr><td>23</td><td><a href="https://cwe.mitre.org/data/definitions/1395.html">CWE-1395</a></td><td class="num">3</td><td>Dependency on Vulnerable Third-Party Component</td></tr>
-<tr><td>24</td><td><a href="https://cwe.mitre.org/data/definitions/22.html">CWE-22</a></td><td class="num">3</td><td>Improper Limitation of a Pathname to a Restricted Directory</td></tr>
-<tr><td>25</td><td><a href="https://cwe.mitre.org/data/definitions/319.html">CWE-319</a></td><td class="num">3</td><td>Cleartext Transmission of Sensitive Information</td></tr>
-<tr><td>26</td><td><a href="https://cwe.mitre.org/data/definitions/331.html">CWE-331</a></td><td class="num">3</td><td>Insufficient Entropy</td></tr>
-<tr><td>27</td><td><a href="https://cwe.mitre.org/data/definitions/352.html">CWE-352</a></td><td class="num">3</td><td>Cross-Site Request Forgery (CSRF)</td></tr>
-<tr><td>28</td><td><a href="https://cwe.mitre.org/data/definitions/400.html">CWE-400</a></td><td class="num">3</td><td>Uncontrolled Resource Consumption</td></tr>
-<tr><td>29</td><td><a href="https://cwe.mitre.org/data/definitions/416.html">CWE-416</a></td><td class="num">3</td><td>Use After Free</td></tr>
-<tr><td>30</td><td><a href="https://cwe.mitre.org/data/definitions/444.html">CWE-444</a></td><td class="num">3</td><td>Inconsistent Interpretation of HTTP Requests (&#39;HTTP</td></tr>
-<tr><td>31</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">CWE-476</a></td><td class="num">3</td><td>NULL Pointer Dereference</td></tr>
-<tr><td>32</td><td><a href="https://cwe.mitre.org/data/definitions/789.html">CWE-789</a></td><td class="num">3</td><td>Memory Allocation with Excessive Size Value</td></tr>
-<tr><td>33</td><td><a href="https://cwe.mitre.org/data/definitions/1104.html">CWE-1104</a></td><td class="num">2</td><td>Use of Unmaintained Third Party Components</td></tr>
-<tr><td>34</td><td><a href="https://cwe.mitre.org/data/definitions/113.html">CWE-113</a></td><td class="num">2</td><td>Improper Neutralization of CRLF Sequences in HTTP Headers</td></tr>
-<tr><td>35</td><td><a href="https://cwe.mitre.org/data/definitions/121.html">CWE-121</a></td><td class="num">2</td><td>Stack-based Buffer Overflow</td></tr>
-<tr><td>36</td><td><a href="https://cwe.mitre.org/data/definitions/1336.html">CWE-1336</a></td><td class="num">2</td><td>Improper Neutralization of Special Elements Used in a</td></tr>
-<tr><td>37</td><td><a href="https://cwe.mitre.org/data/definitions/248.html">CWE-248</a></td><td class="num">2</td><td>Uncaught Exception</td></tr>
-<tr><td>38</td><td><a href="https://cwe.mitre.org/data/definitions/295.html">CWE-295</a></td><td class="num">2</td><td>Improper Certificate Validation</td></tr>
-<tr><td>39</td><td><a href="https://cwe.mitre.org/data/definitions/305.html">CWE-305</a></td><td class="num">2</td><td>Authentication Bypass by Primary Weakness</td></tr>
-<tr><td>40</td><td><a href="https://cwe.mitre.org/data/definitions/330.html">CWE-330</a></td><td class="num">2</td><td>Use of Insufficiently Random Values</td></tr>
-<tr><td>41</td><td><a href="https://cwe.mitre.org/data/definitions/335.html">CWE-335</a></td><td class="num">2</td><td>Incorrect Usage of Seeds in Pseudo-Random Number Generator</td></tr>
-<tr><td>42</td><td><a href="https://cwe.mitre.org/data/definitions/405.html">CWE-405</a></td><td class="num">2</td><td>Asymmetric Resource Consumption (Amplification)</td></tr>
-<tr><td>43</td><td><a href="https://cwe.mitre.org/data/definitions/407.html">CWE-407</a></td><td class="num">2</td><td>Inefficient Algorithmic Complexity</td></tr>
-<tr><td>44</td><td><a href="https://cwe.mitre.org/data/definitions/470.html">CWE-470</a></td><td class="num">2</td><td>Use of Externally-Controlled Input to Select Classes or Code</td></tr>
-<tr><td>45</td><td><a href="https://cwe.mitre.org/data/definitions/522.html">CWE-522</a></td><td class="num">2</td><td>Insufficiently Protected Credentials</td></tr>
-<tr><td>46</td><td><a href="https://cwe.mitre.org/data/definitions/755.html">CWE-755</a></td><td class="num">2</td><td>Improper Handling of Exceptional Conditions</td></tr>
-<tr><td>47</td><td><a href="https://cwe.mitre.org/data/definitions/757.html">CWE-757</a></td><td class="num">2</td><td>Selection of Less-Secure Algorithm During Negotiation</td></tr>
-<tr><td>48</td><td><a href="https://cwe.mitre.org/data/definitions/835.html">CWE-835</a></td><td class="num">2</td><td>Loop with Unreachable Exit Condition (&#39;Infinite Loop&#39;)</td></tr>
-<tr><td>49</td><td><a href="https://cwe.mitre.org/data/definitions/843.html">CWE-843</a></td><td class="num">2</td><td>Access of Resource Using Incompatible Type (Type Confusion)</td></tr>
-<tr><td>50</td><td><a href="https://cwe.mitre.org/data/definitions/918.html">CWE-918</a></td><td class="num">2</td><td>Server-Side Request Forgery (SSRF)</td></tr>
-<tr><td>51</td><td><a href="https://cwe.mitre.org/data/definitions/1025.html">CWE-1025</a></td><td class="num">1</td><td>Comparison Using Wrong Factors</td></tr>
-<tr><td>52</td><td><a href="https://cwe.mitre.org/data/definitions/122.html">CWE-122</a></td><td class="num">1</td><td>Heap-based Buffer Overflow</td></tr>
-<tr><td>53</td><td><a href="https://cwe.mitre.org/data/definitions/124.html">CWE-124</a></td><td class="num">1</td><td>Buffer Underwrite (&#39;Buffer Underflow&#39;)</td></tr>
-<tr><td>54</td><td><a href="https://cwe.mitre.org/data/definitions/126.html">CWE-126</a></td><td class="num">1</td><td>Buffer Over-read</td></tr>
-<tr><td>55</td><td><a href="https://cwe.mitre.org/data/definitions/1394.html">CWE-1394</a></td><td class="num">1</td><td>Use of Default Cryptographic Key</td></tr>
-<tr><td>56</td><td><a href="https://cwe.mitre.org/data/definitions/145.html">CWE-145</a></td><td class="num">1</td><td>Improper Neutralization of Section Delimiters</td></tr>
-<tr><td>57</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">CWE-170</a></td><td class="num">1</td><td>Improper Null Termination</td></tr>
-<tr><td>58</td><td><a href="https://cwe.mitre.org/data/definitions/191.html">CWE-191</a></td><td class="num">1</td><td>Integer Underflow (Wrap or Wraparound)</td></tr>
-<tr><td>59</td><td><a href="https://cwe.mitre.org/data/definitions/196.html">CWE-196</a></td><td class="num">1</td><td>Unsigned to Signed Conversion Error</td></tr>
-<tr><td>60</td><td><a href="https://cwe.mitre.org/data/definitions/201.html">CWE-201</a></td><td class="num">1</td><td>Insertion of Sensitive Information Into Sent Data</td></tr>
-<tr><td>61</td><td><a href="https://cwe.mitre.org/data/definitions/204.html">CWE-204</a></td><td class="num">1</td><td>Observable Response Discrepancy</td></tr>
-<tr><td>62</td><td><a href="https://cwe.mitre.org/data/definitions/294.html">CWE-294</a></td><td class="num">1</td><td>Authentication Bypass by Capture-replay</td></tr>
-<tr><td>63</td><td><a href="https://cwe.mitre.org/data/definitions/307.html">CWE-307</a></td><td class="num">1</td><td>Improper Restriction of Excessive Authentication Attempts</td></tr>
-<tr><td>64</td><td><a href="https://cwe.mitre.org/data/definitions/323.html">CWE-323</a></td><td class="num">1</td><td>Reusing a Nonce, Key Pair in Encryption</td></tr>
-<tr><td>65</td><td><a href="https://cwe.mitre.org/data/definitions/341.html">CWE-341</a></td><td class="num">1</td><td>Predictable from Observable State</td></tr>
-<tr><td>66</td><td><a href="https://cwe.mitre.org/data/definitions/353.html">CWE-353</a></td><td class="num">1</td><td>Missing Support for Integrity Check</td></tr>
-<tr><td>67</td><td><a href="https://cwe.mitre.org/data/definitions/384.html">CWE-384</a></td><td class="num">1</td><td>Session Fixation</td></tr>
-<tr><td>68</td><td><a href="https://cwe.mitre.org/data/definitions/409.html">CWE-409</a></td><td class="num">1</td><td>Improper Handling of Highly Compressed Data (Data</td></tr>
-<tr><td>69</td><td><a href="https://cwe.mitre.org/data/definitions/415.html">CWE-415</a></td><td class="num">1</td><td>Double Free</td></tr>
-<tr><td>70</td><td><a href="https://cwe.mitre.org/data/definitions/426.html">CWE-426</a></td><td class="num">1</td><td>Untrusted Search Path</td></tr>
-<tr><td>71</td><td><a href="https://cwe.mitre.org/data/definitions/480.html">CWE-480</a></td><td class="num">1</td><td>Use of Incorrect Operator</td></tr>
-<tr><td>72</td><td><a href="https://cwe.mitre.org/data/definitions/502.html">CWE-502</a></td><td class="num">1</td><td>Deserialization of Untrusted Data</td></tr>
-<tr><td>73</td><td><a href="https://cwe.mitre.org/data/definitions/524.html">CWE-524</a></td><td class="num">1</td><td>Use of Cache Containing Sensitive Information</td></tr>
-<tr><td>74</td><td><a href="https://cwe.mitre.org/data/definitions/552.html">CWE-552</a></td><td class="num">1</td><td>Files or Directories Accessible to External Parties</td></tr>
-<tr><td>75</td><td><a href="https://cwe.mitre.org/data/definitions/601.html">CWE-601</a></td><td class="num">1</td><td>URL Redirection to Untrusted Site (&#39;Open Redirect&#39;)</td></tr>
-<tr><td>76</td><td><a href="https://cwe.mitre.org/data/definitions/628.html">CWE-628</a></td><td class="num">1</td><td>Function Call with Incorrectly Specified Arguments</td></tr>
-<tr><td>77</td><td><a href="https://cwe.mitre.org/data/definitions/640.html">CWE-640</a></td><td class="num">1</td><td>Weak Password Recovery Mechanism for Forgotten Password</td></tr>
-<tr><td>78</td><td><a href="https://cwe.mitre.org/data/definitions/642.html">CWE-642</a></td><td class="num">1</td><td>External Control of Critical State Data</td></tr>
-<tr><td>79</td><td><a href="https://cwe.mitre.org/data/definitions/643.html">CWE-643</a></td><td class="num">1</td><td>Improper Neutralization of Data within XPath Expressions</td></tr>
-<tr><td>80</td><td><a href="https://cwe.mitre.org/data/definitions/670.html">CWE-670</a></td><td class="num">1</td><td>Always-Incorrect Control Flow Implementation</td></tr>
-<tr><td>81</td><td><a href="https://cwe.mitre.org/data/definitions/672.html">CWE-672</a></td><td class="num">1</td><td>Operation on a Resource after Expiration or Release</td></tr>
-<tr><td>82</td><td><a href="https://cwe.mitre.org/data/definitions/680.html">CWE-680</a></td><td class="num">1</td><td>Integer Overflow to Buffer Overflow</td></tr>
-<tr><td>83</td><td><a href="https://cwe.mitre.org/data/definitions/763.html">CWE-763</a></td><td class="num">1</td><td>Release of Invalid Pointer or Reference</td></tr>
-<tr><td>84</td><td><a href="https://cwe.mitre.org/data/definitions/790.html">CWE-790</a></td><td class="num">1</td><td>Improper Filtering of Special Elements</td></tr>
-<tr><td>85</td><td><a href="https://cwe.mitre.org/data/definitions/804.html">CWE-804</a></td><td class="num">1</td><td>Guessable CAPTCHA</td></tr>
-<tr><td>86</td><td><a href="https://cwe.mitre.org/data/definitions/805.html">CWE-805</a></td><td class="num">1</td><td>Buffer Access with Incorrect Length Value</td></tr>
-<tr><td>87</td><td><a href="https://cwe.mitre.org/data/definitions/829.html">CWE-829</a></td><td class="num">1</td><td>Inclusion of Functionality from Untrusted Control Sphere</td></tr>
-<tr><td>88</td><td><a href="https://cwe.mitre.org/data/definitions/862.html">CWE-862</a></td><td class="num">1</td><td>Missing Authorization</td></tr>
-<tr><td>89</td><td><a href="https://cwe.mitre.org/data/definitions/88.html">CWE-88</a></td><td class="num">1</td><td>Improper Neutralization of Argument Delimiters in a Command</td></tr>
-<tr><td>90</td><td><a href="https://cwe.mitre.org/data/definitions/89.html">CWE-89</a></td><td class="num">1</td><td>Improper Neutralization of Special Elements used in an SQL</td></tr>
-<tr><td>91</td><td><a href="https://cwe.mitre.org/data/definitions/916.html">CWE-916</a></td><td class="num">1</td><td>Use of Password Hash With Insufficient Computational Effort</td></tr>
+<tr><td>19</td><td><a href="https://cwe.mitre.org/data/definitions/789.html">CWE-789</a></td><td class="num">4</td><td>Memory Allocation with Excessive Size Value</td></tr>
+<tr><td>20</td><td><a href="https://cwe.mitre.org/data/definitions/95.html">CWE-95</a></td><td class="num">4</td><td>Improper Neutralization of Directives in Dynamically Evaluated</td></tr>
+<tr><td>21</td><td><a href="https://cwe.mitre.org/data/definitions/1284.html">CWE-1284</a></td><td class="num">3</td><td>Improper Validation of Specified Quantity in Input</td></tr>
+<tr><td>22</td><td><a href="https://cwe.mitre.org/data/definitions/1287.html">CWE-1287</a></td><td class="num">3</td><td>Improper Validation of Specified Type of Input</td></tr>
+<tr><td>23</td><td><a href="https://cwe.mitre.org/data/definitions/1333.html">CWE-1333</a></td><td class="num">3</td><td>Inefficient Regular Expression Complexity</td></tr>
+<tr><td>24</td><td><a href="https://cwe.mitre.org/data/definitions/1395.html">CWE-1395</a></td><td class="num">3</td><td>Dependency on Vulnerable Third-Party Component</td></tr>
+<tr><td>25</td><td><a href="https://cwe.mitre.org/data/definitions/22.html">CWE-22</a></td><td class="num">3</td><td>Improper Limitation of a Pathname to a Restricted Directory</td></tr>
+<tr><td>26</td><td><a href="https://cwe.mitre.org/data/definitions/319.html">CWE-319</a></td><td class="num">3</td><td>Cleartext Transmission of Sensitive Information</td></tr>
+<tr><td>27</td><td><a href="https://cwe.mitre.org/data/definitions/331.html">CWE-331</a></td><td class="num">3</td><td>Insufficient Entropy</td></tr>
+<tr><td>28</td><td><a href="https://cwe.mitre.org/data/definitions/352.html">CWE-352</a></td><td class="num">3</td><td>Cross-Site Request Forgery (CSRF)</td></tr>
+<tr><td>29</td><td><a href="https://cwe.mitre.org/data/definitions/400.html">CWE-400</a></td><td class="num">3</td><td>Uncontrolled Resource Consumption</td></tr>
+<tr><td>30</td><td><a href="https://cwe.mitre.org/data/definitions/416.html">CWE-416</a></td><td class="num">3</td><td>Use After Free</td></tr>
+<tr><td>31</td><td><a href="https://cwe.mitre.org/data/definitions/444.html">CWE-444</a></td><td class="num">3</td><td>Inconsistent Interpretation of HTTP Requests (&#39;HTTP</td></tr>
+<tr><td>32</td><td><a href="https://cwe.mitre.org/data/definitions/470.html">CWE-470</a></td><td class="num">3</td><td>Use of Externally-Controlled Input to Select Classes or Code</td></tr>
+<tr><td>33</td><td><a href="https://cwe.mitre.org/data/definitions/476.html">CWE-476</a></td><td class="num">3</td><td>NULL Pointer Dereference</td></tr>
+<tr><td>34</td><td><a href="https://cwe.mitre.org/data/definitions/835.html">CWE-835</a></td><td class="num">3</td><td>Loop with Unreachable Exit Condition (&#39;Infinite Loop&#39;)</td></tr>
+<tr><td>35</td><td><a href="https://cwe.mitre.org/data/definitions/1104.html">CWE-1104</a></td><td class="num">2</td><td>Use of Unmaintained Third Party Components</td></tr>
+<tr><td>36</td><td><a href="https://cwe.mitre.org/data/definitions/113.html">CWE-113</a></td><td class="num">2</td><td>Improper Neutralization of CRLF Sequences in HTTP Headers</td></tr>
+<tr><td>37</td><td><a href="https://cwe.mitre.org/data/definitions/121.html">CWE-121</a></td><td class="num">2</td><td>Stack-based Buffer Overflow</td></tr>
+<tr><td>38</td><td><a href="https://cwe.mitre.org/data/definitions/1336.html">CWE-1336</a></td><td class="num">2</td><td>Improper Neutralization of Special Elements Used in a</td></tr>
+<tr><td>39</td><td><a href="https://cwe.mitre.org/data/definitions/196.html">CWE-196</a></td><td class="num">2</td><td>Unsigned to Signed Conversion Error</td></tr>
+<tr><td>40</td><td><a href="https://cwe.mitre.org/data/definitions/248.html">CWE-248</a></td><td class="num">2</td><td>Uncaught Exception</td></tr>
+<tr><td>41</td><td><a href="https://cwe.mitre.org/data/definitions/295.html">CWE-295</a></td><td class="num">2</td><td>Improper Certificate Validation</td></tr>
+<tr><td>42</td><td><a href="https://cwe.mitre.org/data/definitions/305.html">CWE-305</a></td><td class="num">2</td><td>Authentication Bypass by Primary Weakness</td></tr>
+<tr><td>43</td><td><a href="https://cwe.mitre.org/data/definitions/330.html">CWE-330</a></td><td class="num">2</td><td>Use of Insufficiently Random Values</td></tr>
+<tr><td>44</td><td><a href="https://cwe.mitre.org/data/definitions/335.html">CWE-335</a></td><td class="num">2</td><td>Incorrect Usage of Seeds in Pseudo-Random Number Generator</td></tr>
+<tr><td>45</td><td><a href="https://cwe.mitre.org/data/definitions/405.html">CWE-405</a></td><td class="num">2</td><td>Asymmetric Resource Consumption (Amplification)</td></tr>
+<tr><td>46</td><td><a href="https://cwe.mitre.org/data/definitions/407.html">CWE-407</a></td><td class="num">2</td><td>Inefficient Algorithmic Complexity</td></tr>
+<tr><td>47</td><td><a href="https://cwe.mitre.org/data/definitions/522.html">CWE-522</a></td><td class="num">2</td><td>Insufficiently Protected Credentials</td></tr>
+<tr><td>48</td><td><a href="https://cwe.mitre.org/data/definitions/755.html">CWE-755</a></td><td class="num">2</td><td>Improper Handling of Exceptional Conditions</td></tr>
+<tr><td>49</td><td><a href="https://cwe.mitre.org/data/definitions/757.html">CWE-757</a></td><td class="num">2</td><td>Selection of Less-Secure Algorithm During Negotiation</td></tr>
+<tr><td>50</td><td><a href="https://cwe.mitre.org/data/definitions/843.html">CWE-843</a></td><td class="num">2</td><td>Access of Resource Using Incompatible Type (Type Confusion)</td></tr>
+<tr><td>51</td><td><a href="https://cwe.mitre.org/data/definitions/918.html">CWE-918</a></td><td class="num">2</td><td>Server-Side Request Forgery (SSRF)</td></tr>
+<tr><td>52</td><td><a href="https://cwe.mitre.org/data/definitions/1025.html">CWE-1025</a></td><td class="num">1</td><td>Comparison Using Wrong Factors</td></tr>
+<tr><td>53</td><td><a href="https://cwe.mitre.org/data/definitions/122.html">CWE-122</a></td><td class="num">1</td><td>Heap-based Buffer Overflow</td></tr>
+<tr><td>54</td><td><a href="https://cwe.mitre.org/data/definitions/124.html">CWE-124</a></td><td class="num">1</td><td>Buffer Underwrite (&#39;Buffer Underflow&#39;)</td></tr>
+<tr><td>55</td><td><a href="https://cwe.mitre.org/data/definitions/126.html">CWE-126</a></td><td class="num">1</td><td>Buffer Over-read</td></tr>
+<tr><td>56</td><td><a href="https://cwe.mitre.org/data/definitions/1394.html">CWE-1394</a></td><td class="num">1</td><td>Use of Default Cryptographic Key</td></tr>
+<tr><td>57</td><td><a href="https://cwe.mitre.org/data/definitions/145.html">CWE-145</a></td><td class="num">1</td><td>Improper Neutralization of Section Delimiters</td></tr>
+<tr><td>58</td><td><a href="https://cwe.mitre.org/data/definitions/170.html">CWE-170</a></td><td class="num">1</td><td>Improper Null Termination</td></tr>
+<tr><td>59</td><td><a href="https://cwe.mitre.org/data/definitions/191.html">CWE-191</a></td><td class="num">1</td><td>Integer Underflow (Wrap or Wraparound)</td></tr>
+<tr><td>60</td><td><a href="https://cwe.mitre.org/data/definitions/193.html">CWE-193</a></td><td class="num">1</td><td>Off-by-one Error</td></tr>
+<tr><td>61</td><td><a href="https://cwe.mitre.org/data/definitions/201.html">CWE-201</a></td><td class="num">1</td><td>Insertion of Sensitive Information Into Sent Data</td></tr>
+<tr><td>62</td><td><a href="https://cwe.mitre.org/data/definitions/204.html">CWE-204</a></td><td class="num">1</td><td>Observable Response Discrepancy</td></tr>
+<tr><td>63</td><td><a href="https://cwe.mitre.org/data/definitions/294.html">CWE-294</a></td><td class="num">1</td><td>Authentication Bypass by Capture-replay</td></tr>
+<tr><td>64</td><td><a href="https://cwe.mitre.org/data/definitions/307.html">CWE-307</a></td><td class="num">1</td><td>Improper Restriction of Excessive Authentication Attempts</td></tr>
+<tr><td>65</td><td><a href="https://cwe.mitre.org/data/definitions/323.html">CWE-323</a></td><td class="num">1</td><td>Reusing a Nonce, Key Pair in Encryption</td></tr>
+<tr><td>66</td><td><a href="https://cwe.mitre.org/data/definitions/341.html">CWE-341</a></td><td class="num">1</td><td>Predictable from Observable State</td></tr>
+<tr><td>67</td><td><a href="https://cwe.mitre.org/data/definitions/353.html">CWE-353</a></td><td class="num">1</td><td>Missing Support for Integrity Check</td></tr>
+<tr><td>68</td><td><a href="https://cwe.mitre.org/data/definitions/384.html">CWE-384</a></td><td class="num">1</td><td>Session Fixation</td></tr>
+<tr><td>69</td><td><a href="https://cwe.mitre.org/data/definitions/409.html">CWE-409</a></td><td class="num">1</td><td>Improper Handling of Highly Compressed Data (Data</td></tr>
+<tr><td>70</td><td><a href="https://cwe.mitre.org/data/definitions/415.html">CWE-415</a></td><td class="num">1</td><td>Double Free</td></tr>
+<tr><td>71</td><td><a href="https://cwe.mitre.org/data/definitions/426.html">CWE-426</a></td><td class="num">1</td><td>Untrusted Search Path</td></tr>
+<tr><td>72</td><td><a href="https://cwe.mitre.org/data/definitions/480.html">CWE-480</a></td><td class="num">1</td><td>Use of Incorrect Operator</td></tr>
+<tr><td>73</td><td><a href="https://cwe.mitre.org/data/definitions/502.html">CWE-502</a></td><td class="num">1</td><td>Deserialization of Untrusted Data</td></tr>
+<tr><td>74</td><td><a href="https://cwe.mitre.org/data/definitions/524.html">CWE-524</a></td><td class="num">1</td><td>Use of Cache Containing Sensitive Information</td></tr>
+<tr><td>75</td><td><a href="https://cwe.mitre.org/data/definitions/552.html">CWE-552</a></td><td class="num">1</td><td>Files or Directories Accessible to External Parties</td></tr>
+<tr><td>76</td><td><a href="https://cwe.mitre.org/data/definitions/601.html">CWE-601</a></td><td class="num">1</td><td>URL Redirection to Untrusted Site (&#39;Open Redirect&#39;)</td></tr>
+<tr><td>77</td><td><a href="https://cwe.mitre.org/data/definitions/628.html">CWE-628</a></td><td class="num">1</td><td>Function Call with Incorrectly Specified Arguments</td></tr>
+<tr><td>78</td><td><a href="https://cwe.mitre.org/data/definitions/640.html">CWE-640</a></td><td class="num">1</td><td>Weak Password Recovery Mechanism for Forgotten Password</td></tr>
+<tr><td>79</td><td><a href="https://cwe.mitre.org/data/definitions/642.html">CWE-642</a></td><td class="num">1</td><td>External Control of Critical State Data</td></tr>
+<tr><td>80</td><td><a href="https://cwe.mitre.org/data/definitions/643.html">CWE-643</a></td><td class="num">1</td><td>Improper Neutralization of Data within XPath Expressions</td></tr>
+<tr><td>81</td><td><a href="https://cwe.mitre.org/data/definitions/670.html">CWE-670</a></td><td class="num">1</td><td>Always-Incorrect Control Flow Implementation</td></tr>
+<tr><td>82</td><td><a href="https://cwe.mitre.org/data/definitions/672.html">CWE-672</a></td><td class="num">1</td><td>Operation on a Resource after Expiration or Release</td></tr>
+<tr><td>83</td><td><a href="https://cwe.mitre.org/data/definitions/680.html">CWE-680</a></td><td class="num">1</td><td>Integer Overflow to Buffer Overflow</td></tr>
+<tr><td>84</td><td><a href="https://cwe.mitre.org/data/definitions/763.html">CWE-763</a></td><td class="num">1</td><td>Release of Invalid Pointer or Reference</td></tr>
+<tr><td>85</td><td><a href="https://cwe.mitre.org/data/definitions/790.html">CWE-790</a></td><td class="num">1</td><td>Improper Filtering of Special Elements</td></tr>
+<tr><td>86</td><td><a href="https://cwe.mitre.org/data/definitions/804.html">CWE-804</a></td><td class="num">1</td><td>Guessable CAPTCHA</td></tr>
+<tr><td>87</td><td><a href="https://cwe.mitre.org/data/definitions/805.html">CWE-805</a></td><td class="num">1</td><td>Buffer Access with Incorrect Length Value</td></tr>
+<tr><td>88</td><td><a href="https://cwe.mitre.org/data/definitions/829.html">CWE-829</a></td><td class="num">1</td><td>Inclusion of Functionality from Untrusted Control Sphere</td></tr>
+<tr><td>89</td><td><a href="https://cwe.mitre.org/data/definitions/862.html">CWE-862</a></td><td class="num">1</td><td>Missing Authorization</td></tr>
+<tr><td>90</td><td><a href="https://cwe.mitre.org/data/definitions/88.html">CWE-88</a></td><td class="num">1</td><td>Improper Neutralization of Argument Delimiters in a Command</td></tr>
+<tr><td>91</td><td><a href="https://cwe.mitre.org/data/definitions/89.html">CWE-89</a></td><td class="num">1</td><td>Improper Neutralization of Special Elements used in an SQL</td></tr>
+<tr><td>92</td><td><a href="https://cwe.mitre.org/data/definitions/908.html">CWE-908</a></td><td class="num">1</td><td>Use of Uninitialized Resource</td></tr>
+<tr><td>93</td><td><a href="https://cwe.mitre.org/data/definitions/916.html">CWE-916</a></td><td class="num">1</td><td>Use of Password Hash With Insufficient Computational Effort</td></tr>
 
 </tbody></table>
 </main></body></html>
